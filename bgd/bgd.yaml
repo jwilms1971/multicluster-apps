@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: example
+  name: bgd
   namespace: red-argocd
 spec:
   generators:
@@ -23,7 +23,7 @@ spec:
       project: default
       source:
         path: bgd/overlays/dev
-        repoURL: https://github.com/jwilms1971/muticluster-apps
+        repoURL: https://github.com/jwilms1971/multicluster-apps
         targetRevision: main
       syncPolicy:
         automated:
