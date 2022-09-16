@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: example
+  namespace: red-argocd
+spec:
+  generators:
+  - clusterDecisionResource:
+      configMapRef: acm-placement
+      labelSelector:
+        matchLabels:
+          cluster.open-cluster-management.io/placement: red-openshift-clusters
+      requeueAfterSeconds: 180
+  template:
+    metadata:
+      labels:
+        velero.io/exclude-from-backup: "true"
+      name: example-{{name}}
+    spec:
+      destination:
+        namespace: bgd
+        server: '{{server}}'
+      project: default
+      source:
+        path: bgd/overlays/dev
+        repoURL: https://github.com/jwilms1971/multicluster-apps
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - PruneLast=true
