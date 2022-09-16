@@ -23,7 +23,7 @@ spec:
       project: default
       source:
         path: bgd/overlays/dev
-        repoURL: https://github.com/jwilms1971/multicluster-apps
+        repoURL: https://github.com/jwilms1971/muticluster-apps
         targetRevision: main
       syncPolicy:
         automated:
